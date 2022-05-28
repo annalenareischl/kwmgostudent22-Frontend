@@ -1,0 +1,55 @@
+<button [routerLink]="'/courses'" class="ui black button">back</button>
+<br>
+<hr><br>
+
+<div class="ui grid" *ngIf="course">
+  <div class="twelve wide column">
+    <h1 class="ui header">{{course.title}}</h1>
+    <h3 class="ui header">{{course.description}}</h3>
+    <div class="ui divider"></div>
+    <div class="ui grid">
+      <div class="four wide column">
+        <h4 class="ui header">Lehrende:</h4>
+        <span>{{course.user.firstname}} {{course.user.lastname}}</span>
+      </div>
+      <div class="four wide column">
+        <h4 class="ui header">Semester:</h4>
+        <span>{{course.semester}}</span>
+      </div>
+      <div class="four wide column">
+        <h4 class="ui header">Kürzel:</h4>
+        <span>{{course.cID}}</span>
+      </div>
+      <div class="four wide column">
+        <h4 class="ui header">Freie Slots (nur für Members sichtbar):</h4>
+        <span *ngFor="let timeslot of course.timeslot; last as l">
+          Am {{timeslot.day}} von {{timeslot.from}} bis {{timeslot.to}}
+          <button id="btnBooking" (click)="setBooked()" class="{{timeslot.day}}{{timeslot.from}}{{timeslot.to}} ui red button">Buchen
+          </button>
+          <br>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Mehr über die lehrende Person:</h2>
+<b>Name: </b>{{course.user.firstname}} {{course.user.lastname}}<br>
+<b>Semester: </b>{{course.user.semester}}<br>
+<b>Info: </b>{{course.user.description}}<br>
+<b>E-Mail: </b>{{course.user.email}}<br>
+<hr>
+
+
+<button *ngIf="authService.isLoggedIn()" class="ui tiny red labeled icon button"
+        (click)="removeCourse()">
+  <i class="remove icon"></i> Kurs löschen
+</button>
+
+<!-- User=Ersteller??? Prüfen -->
+<!-- Form sollte dann mit Daten gefüllt sein und bearbeitbar sein-->
+<a *ngIf="authService.isLoggedIn()" class="ui tiny yellow labeled icon button"
+   [routerLink]="['../../admin', course?.cID]">
+  <i class="write icon"></i> Kurs bearbeiten
+</a>
+

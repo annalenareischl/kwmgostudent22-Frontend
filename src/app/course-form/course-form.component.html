@@ -1,0 +1,75 @@
+<!--
+Kurs-Inhalte Daten:  ['cID', 'title', 'semester', 'description', 'comment', 'user_id'];
+Slot-Inhalte Daten: ['day', 'from', 'to', 'is_available', 'course_id']
+-->
+<h1>Kurs erstellen</h1>
+<form class="ui large form" [formGroup]="courseForm" (ngSubmit)="submitForm()">
+
+  <input type="hidden" formControlName="id">
+
+  <!-- Titel -->
+  <div class="field">
+    <label>Kurstitel: </label>
+    <input formControlName="title">
+    <div *ngIf="errors['title']" class="ui negative message">
+      {{errors['title']}}
+    </div>
+  </div>
+
+  <!-- Kürzel -->
+  <div class="field" [class.disabled]="isUpdatingCourse">
+    <label>Kürzel des Kurses:</label>
+    <input formControlName="cID">
+    <div *ngIf="errors['cID']" class="ui negative message">
+      {{errors['cID']}}
+    </div>
+  </div>
+
+  <!-- Semester -->
+  <div class="field">
+    <label>Semester (1-6):</label>
+    <input type="number" formControlName="semester">
+    <div *ngIf="errors['semester']" class="ui negative message">
+      {{errors['semester']}}
+    </div>
+  </div>
+
+  <!-- Beschreibung -->
+  <div class="field">
+    <label>Beschreibung</label>
+    <textarea formControlName="description" rows="3"></textarea>
+  </div>
+
+  <div class="field">
+    <label>Timeslots</label>
+    <div formArrayName="timeslots">
+
+
+      <div class="fields"
+           *ngFor="let control of timeslots.controls;
+         index as i; last as l"
+           [formGroupName]="i">
+
+        <input type="hidden" formControlName="id">
+
+        <div class="four wide field">
+          <input type="date" formControlName="day" placeholder="03.06.2022">
+        </div>
+
+        <div class="four wide field">
+          <input type="time" formControlName="from" placeholder="09:00">
+        </div>
+
+        <div class="four wide field">
+          <input type="time" formControlName="to" placeholder="10:30">
+        </div>
+
+        <div class="one wide field" *ngIf="l">
+          <button (click)="addTimeslotsControl()" class="ui large button" type="button">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="ui button" [disabled]="courseForm.invalid">Speichern</button>
+</form>
