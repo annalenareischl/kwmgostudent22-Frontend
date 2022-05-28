@@ -24,7 +24,8 @@
         <h4 class="ui header">Freie Slots (nur für Members sichtbar):</h4>
         <span *ngFor="let timeslot of course.timeslot; last as l">
           Am {{timeslot.day}} von {{timeslot.from}} bis {{timeslot.to}}
-          <button id="btnBooking" (click)="setBooked()" class="{{timeslot.day}}{{timeslot.from}}{{timeslot.to}} ui red button">Buchen
+          <button id="btnBooking" (click)="setBooked()"
+                  class="{{timeslot.day}}{{timeslot.from}}{{timeslot.to}} ui red button">Buchen
           </button>
           <br>
         </span>

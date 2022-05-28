@@ -41,12 +41,11 @@ export class CourseDetailsComponent implements OnInit{
 
 
   setBooked() {
+
     // @ts-ignore
     this.course.timeslot[0].is_available=false;
-    // @ts-ignore
-    console.log("Kurs um"+this.course.timeslot[0]+" gebucht");
-  }
 
+  }
 
 
 }

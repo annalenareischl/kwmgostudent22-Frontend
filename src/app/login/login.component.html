@@ -26,13 +26,14 @@ loginForm.get('password')?.touched)" class="ui negative message"> Passwort ist v
   </form>
 </div>
 <div *ngIf="isLoggedIn()">
+  <!--
   <div *ngIf="user">
     <h1>Hallo,</h1>
     <span *ngIf="showName()">{{user.firstname}} {{user.lastname}}</span>
     <br><br>
     <h2>Hier findest du deine Kurse: </h2>
-    <!-- Liste aller Kurse (Teacher bekommen ihre Kures, Studies die gebuchten Kurse -->
+    Liste aller Kurse (Teacher bekommen ihre Kures, Studies die gebuchten Kurse
     <button type="button" class="ui button" (click)="logout()">Logout</button>
   </div>
-
+-->
 </div>

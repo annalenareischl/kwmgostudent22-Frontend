@@ -3,5 +3,5 @@
   <a routerLink="home" routerLinkActive="active" class="item">Home</a>
   <a routerLink="courses" routerLinkActive="active" class="item">Kurse</a>
   <a *ngIf="isLoggedIn()" routerLink="admin" routerLinkActive="active" class="item">Kurs erstellen</a>
-  <a routerLink="login" routerLinkActive="active" class="item">{{getLoginLabel()}}</a></div>
+  <a routerLink="login" routerLinkActive="active"  (click)="logout()" class="item">{{getLoginLabel()}}</a></div>
 <router-outlet></router-outlet>

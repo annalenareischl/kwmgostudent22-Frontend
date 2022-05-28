@@ -43,11 +43,7 @@ Slot-Inhalte Daten: ['day', 'from', 'to', 'is_available', 'course_id']
   <div class="field">
     <label>Timeslots</label>
     <div formArrayName="timeslots">
-
-
-      <div class="fields"
-           *ngFor="let control of timeslots.controls;
-         index as i; last as l"
+      <div class="fields" *ngFor="let control of timeslots.controls; index as i; last as l"
            [formGroupName]="i">
 
         <input type="hidden" formControlName="id">

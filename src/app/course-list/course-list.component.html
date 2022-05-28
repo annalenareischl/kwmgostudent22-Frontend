@@ -1,5 +1,3 @@
-
-
 <!--<div class="ui middle aligned selection divided list">
   <a *ngFor="let course of courses" class="item bs-course-list-item" [course]="course">
     <div class="content">
@@ -9,6 +7,8 @@
     </div>
   </a>
 </div> -->
+<h1>Alle Kurse</h1>
+<p>Für Details bitte jeweiligen Kurs auswählen.</p>
 
 <div class="ui middle aligned selection divided list">
   <a *ngFor="let course of courses" class="item bs-course-list-item" [course]="course" [routerLink]="course.cID" ></a>
