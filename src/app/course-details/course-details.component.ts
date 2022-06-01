@@ -60,7 +60,6 @@ export class CourseDetailsComponent implements OnInit{
     else return false;
   }
 
-
   sendComment() {
     console.log("es wurde ein Terminvorschlag gesendet.");
   }

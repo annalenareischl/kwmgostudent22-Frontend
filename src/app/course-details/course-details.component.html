@@ -46,14 +46,17 @@
   </div>
 </div>
 <br>
-<div *ngIf="authService.isLoggedIn() &&!authService.isTeacher()" style="padding-left: 40px;" >
-  <h4>Nicht der passnde Slot dabei? Schlage der lehrenden Person ein Datum vor.</h4>
-  <div class="field">
-    <textarea formControlName="description" rows="3"></textarea>
-  </div>
-  <button (click)="sendComment()" class="ui large button" type="button">Anfrage senden</button>
 
-</div>
+<form style="padding-left: 40px; padding-right: 40px; width: 72%" class="ui form" *ngIf="authService.isLoggedIn() &&!authService.isTeacher()">
+  <div class="field">
+    <label>Nicht der passnde Slot dabei? Schlage der lehrenden Person ein Datum vor.</label>
+    <input type="text" name="Comment" placeholder="Würde auch der 04.06. um 17 Uhr passen?">
+  </div>
+
+  <button (click)="sendComment()" class="ui button" type="submit">Anfrage senden</button>
+</form>
+
+
 
 <div style="padding-left: 55%" *ngIf="authService.isLoggedIn() &&authService.isTeacher() &&isAuthor()" class="ui large buttons">
   <button  class="ui button"
