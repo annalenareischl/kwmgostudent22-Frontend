@@ -1,7 +1,26 @@
 
+
+
 <div class="ui {{isLoggedIn()?'four':'three'}} item tabs menu">
   <a routerLink="home" routerLinkActive="active" class="item">Home</a>
   <a routerLink="courses" routerLinkActive="active" class="item">Kurse</a>
-  <a *ngIf="isLoggedIn()" routerLink="admin" routerLinkActive="active" class="item">Kurs erstellen</a>
-  <a routerLink="login" routerLinkActive="active"  (click)="logout()" class="item">{{getLoginLabel()}}</a></div>
+  <a *ngIf="isLoggedIn() &&isTeacher()" routerLink="admin" routerLinkActive="active" class="item">Kurs erstellen</a>
+  <a routerLink="login" routerLinkActive="active"  (click)="logout()" class="item">{{getLoginLabel()}}</a>
+</div>
+
+
+<div class="ui horizontal list" *ngIf="isLoggedIn()" style="float: right; margin-right: 10px; padding-right: 40px">
+  <div class="item">
+    <img *ngIf="!isTeacher()" class="ui mini circular image" src="https://img.freepik.com/vektoren-kostenlos/geschaeftsmann-charakter-avatar-isoliert_24877-60111.jpg?w=2000">
+    <img *ngIf="isTeacher()" class="ui mini circular image" src="https://image.shutterstock.com/image-vector/happy-teacher-african-ethnicity-standing-260nw-384718075.jpg">
+    <div class="content">
+      <div class="ui sub header">{{helloUserFirstname()}}</div>
+      {{helloUserLastname()}}
+    </div>
+  </div>
+</div>
+
+
 <router-outlet></router-outlet>
+
+

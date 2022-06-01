@@ -2,7 +2,7 @@ import {User} from "./user";
 
 export class UserFactory {
   static empty() : User {
-    return new User(0, "", "", "", "", "", false, 0, "");
+    return new User(0, "",  "", "", "", false, 0, "");
   }
 
   static fromObject (rawUser: any):User{
@@ -12,7 +12,7 @@ export class UserFactory {
       rawUser.firstname,
       rawUser.lastname,
       rawUser.email,
-      rawUser.password,
+      //rawUser.password,
       rawUser.is_teacher,
       rawUser.semester,
       rawUser.description

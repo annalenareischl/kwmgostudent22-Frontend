@@ -1,15 +1,7 @@
-<!--<div class="ui middle aligned selection divided list">
-  <a *ngFor="let course of courses" class="item bs-course-list-item" [course]="course">
-    <div class="content">
-      <div class="header">{{course.title}}</div>
-      <div class="description">{{course?.description}}</div>
 
-    </div>
-  </a>
-</div> -->
-<h1>Alle Kurse</h1>
-<p>Für Details bitte jeweiligen Kurs auswählen.</p>
-
+<h1 style="padding-left: 40px; padding-right: 40px;">Alle Kurse</h1>
+<h2 style="padding-left: 40px; padding-right: 40px;">Für Details bitte jeweiligen Kurs auswählen.</h2>
+<!--
 <div class="ui middle aligned selection divided list">
   <a *ngFor="let course of courses" class="item bs-course-list-item" [course]="course" [routerLink]="course.cID" ></a>
   <div *ngIf="!courses" class="ui active dimmer">
@@ -19,3 +11,20 @@
   </div>
   <p *ngIf="courses && !courses.length">Hier sind noch keine Kurse.</p>
 </div>
+-->
+<div class="ui three doubling stackable cards"  style="padding-left: 40px; padding-right: 40px;">
+  <a *ngFor="let course of courses" class="ui card item bs-course-list-item" [course]="course" [routerLink]="course.cID" ></a>
+    <div class="content">
+      <div>
+        <div class="header">
+          <div class="very short line bold"></div>
+          <div class="medium line"></div>
+          <div class="short line"></div>
+        </div>
+        <div class="paragraph">
+          <div class="short line"></div>
+        </div>
+      </div>
+    </div>
+</div>
+

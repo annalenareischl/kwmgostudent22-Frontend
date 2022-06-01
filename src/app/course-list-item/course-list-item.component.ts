@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Course} from "../shared/course";
+import {CourseFactory} from "../shared/course-factory";
 
 
 @Component({
@@ -11,6 +12,7 @@ import {Course} from "../shared/course";
 export class CourseListItemComponent implements OnInit {
   @Input() course: Course | undefined;
 
+
   constructor() { }
 
   ngOnInit(): void {
@@ -19,5 +21,6 @@ export class CourseListItemComponent implements OnInit {
   myClickHandler() {
     console.log("clicked");
   }
+
 
 }

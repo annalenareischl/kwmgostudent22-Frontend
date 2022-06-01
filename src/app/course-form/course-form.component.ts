@@ -54,24 +54,6 @@ export class CourseFormComponent implements OnInit {
     this.initCourse();
   }
 
-  /*
-  - Kurs initialisieren
-  - mit FormBuilder Form Model anlegen
-   */
- /*
-  initCourse() {
-    this.courseForm = this.fb.group({
-      id: this.course.id,
-      title: [this.course.title, Validators.required],
-      //semester: this.course.semester,
-      semester: [this.course.semester, [Validators.min(1), Validators.max(6)]],
-      cID: this.course.cID,
-      description: this.course.description
-    });
-    this.courseForm.statusChanges.subscribe(() => this.updateErrorMessages());
-  }
-
-  */
 
   initCourse(){
     this.buildSlotsArray();
@@ -94,28 +76,6 @@ export class CourseFormComponent implements OnInit {
     this.courseForm.statusChanges.subscribe(() =>
       this.updateErrorMessages());
   }
-/*
-
-  addTimeslotsControl() {
-    if (this.course.timeslot) {
-      this.timeslots = this.fb.array([]);
-      for (let img of this.course.timeslot) {
-        let fg = this.fb.group({
-          id: new FormControl(img.id),
-          day: new FormControl(img.day, [Validators.required]),
-          from: new FormControl(img.from, [Validators.required]),
-          to: new FormControl(img.to, [Validators.required]),
-          is_available: new FormControl(img.is_available, [Validators.required])
-        });
-        this.timeslots.push(fg);
-      }
-    }
-  }
-
- */
-
-
-
 
 
   submitForm() {
@@ -130,7 +90,9 @@ export class CourseFormComponent implements OnInit {
     } else {
       //todo: auf aktueller user umschreiben
       //const user: User = UserFactory.fromObject(this.courseForm.value); //just copy the authors
-      course.user_id = 1; // just for testing
+      //course.user_id = 1; // just for testing
+      course.user_id = Number(sessionStorage.getItem("user_id"));
+      //course.user_id = sessionStorage[id];
       console.log(course);
       this.bs.create(course).subscribe(res => {
         this.course = CourseFactory.empty();
@@ -139,9 +101,6 @@ export class CourseFormComponent implements OnInit {
       });
     }
   }
-
-
-
 
   updateErrorMessages() {
     console.log("Is invalid? " + this.courseForm.invalid);

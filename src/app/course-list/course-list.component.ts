@@ -17,4 +17,6 @@ export class CourseListComponent implements OnInit {
     this.cs.getAll().subscribe(res =>this.courses = res);
     //this.courses = this.cs.getAll();
   }
+
+
 }

@@ -16,7 +16,7 @@ export class CourseFactory {
         firstname: '',
         lastname: '',
         email: '',
-        password: '',
+        //password: '',
         is_teacher: false,
         semester: 0,
         description: ''

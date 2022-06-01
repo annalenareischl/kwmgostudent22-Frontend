@@ -1,15 +1,15 @@
-<button [routerLink]="'/courses'" class="ui black button">back</button>
+<button style="padding-left: 40px; padding-right: 40px;" [routerLink]="'/courses'" class="ui black button">back</button>
 <br>
-<hr><br>
+<br>
 
-<div class="ui grid" *ngIf="course">
+<div style="padding-left: 40px; padding-right: 40px;" class="ui grid" *ngIf="course">
   <div class="twelve wide column">
     <h1 class="ui header">{{course.title}}</h1>
     <h3 class="ui header">{{course.description}}</h3>
     <div class="ui divider"></div>
     <div class="ui grid">
       <div class="four wide column">
-        <h4 class="ui header">Lehrende:</h4>
+        <h4 class="ui header">lehrende Person:</h4>
         <span>{{course.user.firstname}} {{course.user.lastname}}</span>
       </div>
       <div class="four wide column">
@@ -20,37 +20,56 @@
         <h4 class="ui header">Kürzel:</h4>
         <span>{{course.cID}}</span>
       </div>
-      <div class="four wide column">
-        <h4 class="ui header">Freie Slots (nur für Members sichtbar):</h4>
-        <span *ngFor="let timeslot of course.timeslot; last as l">
-          Am {{timeslot.day}} von {{timeslot.from}} bis {{timeslot.to}}
-          <button id="btnBooking" (click)="setBooked()"
-                  class="{{timeslot.day}}{{timeslot.from}}{{timeslot.to}} ui red button">Buchen
-          </button>
-          <br>
-        </span>
-      </div>
+      <table class="ui celled table">
+        <thead>
+        <tr>
+          <th>Tag</th>
+          <th>von</th>
+          <th>bis</th>
+          <th>Buchung</th>
+
+        </tr>
+        </thead>
+        <tbody *ngFor="let timeslot of course.timeslot; index as i; last as l" >
+        <td>{{timeslot.day}}</td>
+        <td>{{timeslot.from}}</td>
+        <td>{{timeslot.to}}</td>
+        <td><p *ngIf="timeslot.is_available == true">Nicht gebucht</p>
+          <p *ngIf="timeslot.is_available == false">gebucht</p></td>
+        <td>
+          <button *ngIf="!authService.isTeacher() &&authService.isLoggedIn()"
+                  (click)="setBooked(i)" [disabled]="!timeslot.is_available" class="ui red button">Buchen</button>
+        </td>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+<br>
+<div *ngIf="authService.isLoggedIn() &&!authService.isTeacher()" style="padding-left: 40px;" >
+  <h4>Nicht der passnde Slot dabei? Schlage der lehrenden Person ein Datum vor.</h4>
+  <div class="field">
+    <textarea formControlName="description" rows="3"></textarea>
+  </div>
+  <button (click)="sendComment()" class="ui large button" type="button">Anfrage senden</button>
 
-<h2>Mehr über die lehrende Person:</h2>
-<b>Name: </b>{{course.user.firstname}} {{course.user.lastname}}<br>
-<b>Semester: </b>{{course.user.semester}}<br>
-<b>Info: </b>{{course.user.description}}<br>
-<b>E-Mail: </b>{{course.user.email}}<br>
-<hr>
+</div>
 
+<div style="padding-left: 55%" *ngIf="authService.isLoggedIn() &&authService.isTeacher() &&isAuthor()" class="ui large buttons">
+  <button  class="ui button"
+          (click)="removeCourse()">löschen</button>
+  <div class="or"></div>
+  <button class="ui button"
+          [routerLink]="['../../admin', course?.cID]">bearbeiten</button>
+</div>
 
-<button *ngIf="authService.isLoggedIn()" class="ui tiny red labeled icon button"
-        (click)="removeCourse()">
-  <i class="remove icon"></i> Kurs löschen
-</button>
-
-<!-- User=Ersteller??? Prüfen -->
-<!-- Form sollte dann mit Daten gefüllt sein und bearbeitbar sein-->
-<a *ngIf="authService.isLoggedIn()" class="ui tiny yellow labeled icon button"
-   [routerLink]="['../../admin', course?.cID]">
-  <i class="write icon"></i> Kurs bearbeiten
-</a>
+<div class="ui segment">
+  <h2>Über die lehrende Person:</h2>
+  <div class="ui clearing divider">
+  </div>
+  <p> <b>Name:</b> {{course.user.firstname}} {{course.user.lastname}}</p>
+  <p><b>Semester: </b>{{course.user.semester}}</p>
+  <p><b>Info:</b> {{course.user.description}}</p>
+  <p><b>E-Mail:</b> {{course.user.email}}</p>
+</div>
 

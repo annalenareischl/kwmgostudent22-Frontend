@@ -1,18 +1,15 @@
 import {Component} from '@angular/core';
 //import {Course} from "./shared/course";
 import {AuthenticationService} from "./shared/authentication.service";
+import {Course} from "./shared/course";
+import {CourseFactory} from "./shared/course-factory";
 
 @Component({
   selector: 'bs-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  /*listOn = true;
-  detailsOn = false;
-  course: Course | undefined;
-
-   */
-
+  course: Course = CourseFactory.empty();
   constructor(private authService: AuthenticationService) {
   }
 
@@ -31,6 +28,22 @@ export class AppComponent {
   logout() {
     this.authService.logout();
   }
+
+  isTeacher(){
+    //console.log(sessionStorage);
+    if(sessionStorage["is_teacher"]=="1")
+      return true;
+    else return false;
+  }
+
+  helloUserFirstname() {
+    return sessionStorage["firstname"];
+  }
+
+  helloUserLastname() {
+    return sessionStorage["lastname"];
+  }
+
 }
 
 

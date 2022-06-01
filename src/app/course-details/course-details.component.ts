@@ -13,12 +13,9 @@ import {FormGroup} from "@angular/forms";
   ]
 })
 export class CourseDetailsComponent implements OnInit{
-  //@Input() lalala: Course | undefined;
-  //@Output() showListEvent = new EventEmitter<any>();
 
   course: Course = CourseFactory.empty();
-
-
+  clicked = false;
 
   constructor(
     private cs: CourseStorageService,
@@ -40,12 +37,31 @@ export class CourseDetailsComponent implements OnInit{
   }
 
 
-  setBooked() {
+  setBooked(i: number) {
+    if(this.course.timeslot){
+      this.course.timeslot[i].is_available=false;
+      this.cs.update(this.course).subscribe(res => this.course = res);
+    }
+  }
 
-    // @ts-ignore
-    this.course.timeslot[0].is_available=false;
+  isTeacher(){
 
+    if(sessionStorage["is_teacher"]=="1"){
+      return true;
+    }
+    else return false;
   }
 
 
+  isAuthor() {
+    if(this.course.user_id==this.authService.authorsID()) {
+      return true;
+    }
+    else return false;
+  }
+
+
+  sendComment() {
+    console.log("es wurde ein Terminvorschlag gesendet.");
+  }
 }
